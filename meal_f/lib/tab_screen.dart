@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meal_f/category_m.dart';
 import 'package:meal_f/category_screen.dart';
+import 'package:meal_f/drawer.dart';
 import 'package:meal_f/meal.dart';
 import 'package:meal_f/meal_screen.dart';
 
@@ -21,15 +22,22 @@ class _TabScreenState extends State<TabScreen> {
 
   final List<Meal> favoriteMeal = [];
 
+  void showMessage(String message){
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
   void favoriteMealStatus(Meal meal){
     final isExitingMeal = favoriteMeal.contains(meal);
     if(isExitingMeal){
       setState(() {
         favoriteMeal.remove(meal);
+        showMessage('Item removed in favorite');
       });
     }else{
       setState(() {
         favoriteMeal.add(meal);
+        showMessage('Item is added in favorite');
       });
     }
   }
@@ -54,6 +62,7 @@ class _TabScreenState extends State<TabScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
+      drawer: MainDrawer(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectIndex,
