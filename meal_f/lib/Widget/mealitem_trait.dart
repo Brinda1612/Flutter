@@ -11,9 +11,9 @@ class MealitemTrait extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: Colors.white,),
+        Icon(icon, size: 15, color: Colors.black,),
         SizedBox(width: 5,),
-        Text(lable, style: TextStyle(color: Colors.white),)
+        Text(lable, style: TextStyle(color: Colors.black, fontSize: 12),)
       ],
     );
   }

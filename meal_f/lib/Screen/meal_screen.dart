@@ -1,25 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Meal_Item.dart';
-import 'meal.dart';
+import '../../Meal_Item.dart';
+import '../meal.dart';
 import 'meal_deatil.dart';
 
 class Mealscreen extends StatelessWidget {
-  const Mealscreen({super.key,  this.title, required this.meals, required this.onFavorite});
+  const Mealscreen({super.key,  this.title, required this.meals,
+  });
 
   final String? title;
   final List<Meal> meals;
-  final void Function(Meal meal) onFavorite;
 
 
   void selectMeal(BuildContext context, Meal meal){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)
-    => MealDetails(meal: meal, onFavorite: onFavorite),));
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => MealDetails(meal: meal),
+    )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+
     Widget content = Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -36,19 +38,22 @@ class Mealscreen extends StatelessWidget {
         ],
       ),
     );
+
     if(meals.isNotEmpty){
       content =  ListView.builder(
           itemCount: meals.length,
           itemBuilder: (ctx, index) =>
               MealItem(
                 meal: meals[index],
-                onSelectMeal: (meal) {selectMeal(context, meal);},
+                onSelectMeal: (meal) {
+                  selectMeal(context, meal);},
               )
       );
     }
     if(title == null){
       return content;
     }
+
     return Scaffold(
         appBar: AppBar(
           title: Text(title!),
